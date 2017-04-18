@@ -8,7 +8,7 @@ export default({ config, db }) => {
   // CRUD - Create Read Update Delete
   // specifying a version like 'v1' makes it easy to add a 'v2' without breaking 'v1'
 
-  // 'v1/restaurant/add' - Create
+  // 'v1/restaurant/add' - CREATE
   api.post('/add', (req, res) => {
     let newRest = new Restaurant();
     newRest.name = req.body.name;
@@ -33,7 +33,7 @@ export default({ config, db }) => {
     });
   });
 
-  // 'v1/restaurant/:id' - Read 1
+  // 'v1/restaurant/:id' - READ 1
   api.get('/:id', (req, res) => {
     // tell mongoose to find by id
     Restaurant.findById(req.params.id, (err, restaurant) => {
@@ -44,7 +44,7 @@ export default({ config, db }) => {
     });
   });
 
-  // '/v1/restaurant/:id' - Update
+  // '/v1/restaurant/:id' - UPDATE
   api.put('/:id', (req, res) => {
     Restaurant.findById(req.params.id, (err, restaurant) => {
       if (err) {
@@ -56,8 +56,20 @@ export default({ config, db }) => {
         if (err) {
           res.send(err);
         }
-        res.json({ message: 'Restaurant info updated'})
+        res.json({ message: 'Restaurant info updated'});
       });
+    });
+  });
+
+  // '/v1/restaurant/:id' - DELETE
+  api.delete('/:id', (req, res) => {
+    Restaurant.remove({
+      _id: req.params.id
+    }, (err, restaurant) => {
+      if (err) {
+        res.send(err);
+      }
+      res.json({ message: "Restaurant Successfully Removed!"});
     });
   });
 
