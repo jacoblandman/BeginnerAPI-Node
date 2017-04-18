@@ -13,4 +13,6 @@ let ReviewSchema = new Schema({
     ref: 'FoodTruck',
     required: true
   }
-})
+});
+
+module.exports = mongoose.model('Review', ReviewSchema);
