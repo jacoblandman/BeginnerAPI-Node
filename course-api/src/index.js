@@ -13,8 +13,15 @@ let app = express();
 app.server = http.createServer(app);
 
 //  middleware - lets us intercept our request and do an operation with it
+// parse application/json
+app.use(bodyParser.json({
+  // limit the size of data that can be passed in
+  limit: config.bodyLimit
+}));
+
 
 // passport config
+
 
 // api routes v1
 // anything coming to our url/v1 will go to routes
