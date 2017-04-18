@@ -6,6 +6,8 @@ import initializeDb from '../db';
 let router = express();
 
 // connect to db
+// the initializeDb object contains just a function, that needs a function as a param
+// this is the 'callback', which takes the db as an argument
 initializeDb(db => {
 
   // internal middleware
